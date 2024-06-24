@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <script src="{% static 'js/Navjavas.js' %}" defer></script>
+    <link rel="stylesheet" href="{% static 'css/userbooks_styles.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    {% include "user/mainNav.html" %}
+     <h2 class="head" style="text-align: center; color: rgb(58, 156, 242); font-weight: bold; margin-top:70px; ">Available Books</h2>
+    <input type="text" placeholder="Search here..." id="search" class="search-input" style = "margin-left: 10px;">
+    <div id="box">
+        <ul id="available_books_list" class="book-list"></ul>
+    </div>
+
+    {% include "user/Footer.html" %}
+
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function confirmBorrow(bookId, personId, borrowUrl) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You are about to borrow this book.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, borrow it!',
+                cancelButtonText: 'No, cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(borrowUrl, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': getCookie('csrftoken'),
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            Swal.fire(
+                                'Borrowed!',
+                                'The book has been borrowed successfully.',
+                                'success'
+                            ).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                'Something went wrong. Please try again later.',
+                                'error'
+                            );
+                        }
+                    })
+                    .catch((error) => {
+                        Swal.fire(
+                            'Error!',
+                            'Something went wrong. Please try again later.',
+                            'error'
+                        );
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            var personid = "{{ personid }}";  
+            var bookDetailsUrl = "{% url 'bookdetails' book_id=0 person_id=1 %}";
+            var borrowBookUrl = "{% url 'borrow_book' book_id=0 person_id=1 %}";
+            
+            loadAllBooks();
+            $('#search').on('keyup', function() {
+                var query = $(this).val().trim();
+                if (query.length < 1) {
+                    loadAllBooks();
+                } else {
+                    searchBooks(query);
+                }
+            });
+        
+            function searchBooks(query) {
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "availableBooks" person_id=personid %}'.replace('personid', personid),
+                    data: {
+                        'q': query
+                    },
+                    success: function(data) {
+                        updateBookList(data);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+        
+            function loadAllBooks() {
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "availableBooks" person_id=personid %}'.replace('personid', personid),
+                    success: function(data) {
+                        updateBookList(data);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+        
+            function updateBookList(data) {
+                var bookList = $('#available_books_list');
+                bookList.empty();
+                if (data.length > 0) {
+                    $.each(data, function(index, book) {
+                        var bookLink = bookDetailsUrl.replace('/0/', '/' + book.id + '/').replace('/1/', '/' + personid + '/');
+                        var borrowbutnurl = borrowBookUrl.replace('/0/', '/' + book.id + '/').replace('/1/', '/' + personid + '/');
+                        var listItem = '<li class="book-item">' +
+                                       '<a href="' + bookLink + '">' +
+                                       '<img src="' + book.image_url + '" width="300px" class="book-img" alt="Book">' +
+                                       '<p><a href="' + bookLink + '" class="book-link">' + book.bookname + '</a></p>' +
+                                       '</a>';
+        
+                        if (book.is_available) {
+                            listItem += '<button type="button" class="button" onclick="confirmBorrow(\'' + book.id + '\', \'' + personid + '\', \'' + borrowbutnurl + '\')">Borrow</button>';
+                        } else {
+                            listItem += '<p style="text-align: center; color: rgb(58, 156, 242); font-weight: bold;">UNAVAILABLE</p>';
+                        }
+        
+                        listItem += '</li>';
+                        bookList.append(listItem);
+                    });
+                } else {
+                    bookList.append('<br><li>No books found</li><br><br><br><br><br><br>');
+                }
+            }
+        });
+        
+        
+        
+    </script>
+</body>
+</html>

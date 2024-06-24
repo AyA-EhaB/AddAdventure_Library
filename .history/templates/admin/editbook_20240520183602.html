@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Book</title>
+    <link rel="stylesheet" href="{% static 'css/editV1.0.css' %}">
+</head>
+
+<body>
+    {% include "admin/mainnav.html" %}
+    {% include "admin/adminnav.html" %}
+    <div id="container" style="margin-top:150px">
+        <h1 class="form-title" style="text-align: center ;">Edit Book</h1>
+        <form method="post" action="" enctype="multipart/form-data" class="edit-form">
+            {% csrf_token %}
+            <input type="hidden" id="bookID">
+            <div class="image-container">
+                <label for="image-upload" class="image-upload-label" id="imageurl_newbook">
+                    <img id="preview-image" src="{% if book.image %}{{ book.image.url }}{% endif %}" alt="" width="200" height="200">
+                    <span class="upload-text">Drag & Drop or Click to Upload</span>
+                    <input type="file" id="image-upload" accept="image/*" style="display: none;" name="bookImage">
+                </label>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const previewImage = document.getElementById('preview-image');
+                    const imageUpload = document.getElementById('image-upload');
+
+                    imageUpload.addEventListener('change', function () {
+                        if (this.files.length > 0) {
+                            previewImage.src = URL.createObjectURL(this.files[0]);
+                            previewImage.setAttribute("width", 200);
+                            previewImage.setAttribute("height", 200);
+                        }
+                    });
+                });
+            </script>
+
+            <label for="bookname"><b>Book Name :</b></label>
+            <input name="bookname" type="text" placeholder="Book name" id="bookname" class="text-input" value="{{ book.bookname }}"><br>
+            <label for="author"><b>Author :</b></label>
+            <input type="text" placeholder="Author name" id="author" class="text-input" value="{{ book.Author }}" name="author"><br>
+            <label for="Category"><b>Category :</b></label>
+            <select id="Category" class="text-input" name="Category">
+                <option value="Religious">Religious</option>
+                <option value="Psychology">Psychology</option>
+                <option value="Technology">Technology</option>
+                <option value="History">History</option>
+                <option value="Autobiography">Autobiography</option>
+                <option value="Novel">Novel</option>
+            </select><br>
+            <label for="Publisher"><b>Publisher :</b></label>
+            <input type="text" placeholder="Publisher" id="Publisher" class="text-input" value="{{ book.publisher }}" name="Publisher"><br>
+            <label for="PublicationDate"><b>Publication Date :</b></label>
+            <input type="date" placeholder="Publication Date" id="PublicationDate" class="text-input" value="{{ book.PublicationDate|date:'Y-m-d' }}" name="PublicationDate"><br>
+            <label for="NumberofPages"><b>Number of Pages :</b></label>
+            <input type="number" placeholder="Number of Pages" id="NumberofPages" class="text-input" value="{{ book.noofpages }}" name="NumberofPages"><br>
+            <label for="Description"><b>Description :</b></label><br>
+            <textarea name="description" cols="70" rows="20" placeholder="Book description" id="Description" class="description">{{ book.Description }}</textarea><br>
+            <label for="noofcopies"><b>Number of copies :</b></label>
+            <input type="number" id="noofcopies" name="noofcopies" placeholder="Number of copies of the book" class="text-input" value="{{ book.noofcopies }}">
+            <label for="available"><b>Available:</b></label>
+            <input type="checkbox" id="available" name="available" {% if book.available %}checked{% endif %}><br>
+
+            <input type="submit" value="Save Changes" class="submit-btn">
+            <input type="reset" name="reset" value="Reset" class="reset-btn">
+            
+        </form>
+        <form method="POST" action="{% url 'delete' book_id=book.id %}" style="display: inline;text-aline:center;">
+            {% csrf_token %}
+            <button type="submit" class="delete">Delete</button>
+        </form>
+    </div>
+    {% include "admin/Footer.html" %}
+
+</body>
+
+</html>

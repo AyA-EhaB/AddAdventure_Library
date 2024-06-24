@@ -1,0 +1,68 @@
+body{
+    margin: 0;
+    background-image: url(Background.jpg);
+    min-height: fit-content;
+    background-position:center;
+    background-size:cover;
+    color: white;
+    text-align: center;
+    background-repeat: no-repeat;
+    /* min-height: 250px; */
+    z-index: -1;
+    max-height: fit-content;
+}
+
+.divt{
+    margin-top: 12%;
+}
+.divh{
+    font-family: sans-serif;
+    line-height: 350%;
+    
+}
+.hero{
+    font-size: 300%;
+    font-weight: bold;
+    margin: 0;
+}
+.subhero{
+    font-weight: bold;
+}
+
+#divin{
+    
+    
+    margin-top: 80px;
+}
+
+#ain:link{
+    color: black;
+    text-decoration: none;
+    background-color: white;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: sans-serif;
+    font-size: 20px;
+    font-weight:500;
+    border-radius: 7px;
+    padding:12px 36px;
+}
+
+#ain:visited{
+    color: black;
+}
+
+#ain:hover{
+    color: white;
+    background-color: rgb(22, 126, 216);
+    transition: 0.2s;
+}
+#sin{
+    font-size: large;
+}
+.f{
+    margin-top: 10.5%;
+}
+
+

@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Books</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/userbooks_styles.css' %}">
+</head>
+
+<body>
+    {% include 'base/Nav.html' %}
+
+    <h1 class="head" style="text-align: center; color: rgb(58, 156, 242); font-weight: bold;margin-top:70px;">Books</h1>
+
+    <input type="text" placeholder="search here..." id="search">
+    <div id="box">
+        <ul id="available_books_list" class="book-list">
+            {% for x in object_list %}
+            <li class="book-item">
+                <a href="{% url 'bookdetailsfornone' book_id=x.id %}">
+                    <img src="{{ x.image.url }}" width="300px" class="book-img" alt="Book 1">
+                    <p><a href="{% url 'bookdetailsfornone' book_id=x.id %}" class="book-link">{{ x.bookname }}</a></p>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script>
+        const data = JSON.parse('{{ search_data }}');
+        console.log(data);
+
+        const box = document.getElementById("box");
+        const search = document.getElementById("search");
+
+        search.addEventListener('keyup', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const availableBooksList = document.getElementById('available_books_list');
+            availableBooksList.innerHTML = "";
+
+            if (searchTerm.trim()) {
+                box.style.display = "block";
+                const filterArr = data.filter(book => {
+                    if (book.bookname) {
+                        return book.bookname.toLowerCase().includes(searchTerm);
+                    }
+                    return false;
+                });
+
+                if (filterArr.length > 0) {
+                    filterArr.forEach(book => {
+                        const bookItem = document.createElement('li');
+                        bookItem.className = 'book-item';
+
+                        const bookLink = document.createElement('a');
+                        bookLink.href = `/bookdetailsfornone/${book.id}`;
+
+                        const bookImg = document.createElement('img');
+                        bookImg.src = book.image;
+                        bookImg.width = 300;
+                        bookImg.className = 'book-img';
+                        bookImg.alt = 'Book Image';
+
+                        const bookNameLink = document.createElement('a');
+                        bookNameLink.href = `/bookdetailsfornone/${book.id}`;
+                        bookNameLink.className = 'book-link';
+                        bookNameLink.textContent = book.bookname;
+
+                        const bookNameParagraph = document.createElement('p');
+                        bookNameParagraph.appendChild(bookNameLink);
+
+                        bookLink.appendChild(bookImg);
+                        bookLink.appendChild(bookNameParagraph);
+
+                        bookItem.appendChild(bookLink);
+                        availableBooksList.appendChild(bookItem);
+                    });
+                } else {
+                    availableBooksList.innerHTML = `<b>Nothing Found..</b><br>`;
+                }
+            } else {
+                box.style.display = "none";
+            }
+        });
+    </script>
+    {% include 'base/Footer.html' %}
+</body>
+
+</html>

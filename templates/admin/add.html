@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add a new Book</title>
+    <link rel="stylesheet" href="{% static 'css/addv1.0.css' %}">
+</head>
+
+<body>
+    {% include "admin/mainNav.html" %}
+    {% include "admin/adminNav.html" %}
+    <form action="{% url 'add' %}" method="post" class="container" enctype="multipart/form-data" id="addform">
+        {% csrf_token %}
+        <h1 class="form-title">New Book</h1>
+        <div class="image-upload-container">
+            <h3>Book Image</h3>
+            <label for="image-upload" class="image-upload-label">
+                <img src="" alt="" id="old"><br>
+                <label for="image-upload" class="but">Drag & Drop or Click to Upload</label>
+                <input type="file" id="image-upload" accept="image/*" style="display: none;" name="Image">
+            </label><br>
+            <script>
+                let old = document.getElementById("old");
+                let newimg = document.getElementById("image-upload");
+
+                newimg.onchange = function () {
+                    old.src = URL.createObjectURL(this.files[0]);
+                    old.setAttribute("width", 200);
+                    old.setAttribute("height", 200);
+                }
+            </script>
+        </div><br>
+        <label for="bookname_newbook"><b>Book Name :</b></label><input type="text" placeholder="Book name" id="bookname_newbook" class="text-input" name="bookname"><br>
+        <label for="author_newbook"><b>Author :</b></label><input type="text" placeholder="Author name" id="author_newbook" class="text-input" name="auther"><br>
+        <label for="Category"><b>Category :</b></label>
+        <select id="Category" class="text-input" name="Category">
+            <option value="Religious">Religious</option>
+            <option value="Psychology">Psychology</option>
+            <option value="Technology">Technology</option>
+            <option value="History">History</option>
+            <option value="Autobiography">Autobiography</option>
+            <option value="Novel">Novel</option>
+        </select><br>
+        <label for="Publisher_newbook"><b>Publisher :</b></label><input type="text" placeholder="Publisher" id="Publisher_newbook" class="text-input" name="Publisher"><br>
+        <label for="PublicationDate_newbook"><b>Publication Date :</b></label><input type="date" placeholder="Publication Date" id="PublicationDate_newbook" class="text-input" name="PublicationDate"><br>
+        <label for="NumberofPages_newbook"><b>Number of Pages :</b></label><input type="number" placeholder="Number of Pages" id="NumberofPages_newbook" class="text-input" name="noofpages"><br>
+        <label for="Description_newbook"><b>Description </b></label><br><textarea name="description" cols="70" rows="20" placeholder="Book description" id="Description_newbook"></textarea><br>
+        <label for="NumberofCopies_newbook"><b>Number of Copies :</b></label><input type="number" placeholder="Number of Copies" id="NumberofCopies_newbook" class="text-input" name="noofcopies"><br>
+        <label for="Available_newbook"><b>Available :</b></label>
+        <input type="checkbox" id="Available_newbook" name="available" checked><br>
+        
+        <input type="button" name="Save" class="but" value="Add Book" onclick="addbook(event);">
+        <input type="reset" name="reset" value="Reset" class="but">
+    </form>
+    {% include "admin/Footer.html" %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js/add.js' %}"></script>
+</body>
+
+</html>

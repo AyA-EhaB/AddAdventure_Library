@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'css/signupV1.0.css' %}">
+</head>
+
+<body>
+    {% include "base/Nav.html" %}
+
+    <div class="signup-container">
+        <form method="post" class="signup-form" id="signupform">
+            {% csrf_token %}
+            <h2 class="form-title">Sign Up</h2>
+            <div class="form-group">
+                <input type="text" required placeholder="Username" name="username" id="username" autofocus class="form-input">
+            </div>
+            <div class="form-group">
+                <input type="password" required placeholder="Password" name="password" id="password" class="form-input">
+            </div>
+            <div class="form-group">
+              <input type="password" required placeholder="Rewrite Password" name="password2" id="password2" class="form-input">
+          </div>
+            <div class="form-group">
+                <input type="email" required placeholder="Email" name="email" id="email" class="form-input">
+            </div>
+            <div class="form-group">
+                <label for="is_admin">
+                    <input type="checkbox" name="is_admin" id="is_admin">
+                    Admin
+                </label>
+            </div>
+            <a href="{% url 'login' %}" class="login">Already have an account</a>
+            <div class="form-group">
+                <button type="button" class="form-submit" onclick="signup(event);">Sign Up</button>
+                <input type="reset" name="reset" value="Reset" class="form-submit">
+            </div>
+        </form>
+    </div>
+
+    {% include 'base/Footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js/signup.js' %}"></script>
+</body>
+
+</html>
+
+
+
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sign Up Page</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="{% static 'css/signupV1.0.css' %}">
+</head>
+
+<body>
+  {% include "base/Nav.html" %}
+  <div>
+    
+    <form method="POST" id="signup">
+      <h3>Sign Up</h3>
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      
+      <span id="success" style="color:#007bff"></span>
+      <br>
+      <p>
+        <input type="submit" name="signup" value="Sign Up" class="but">
+        <input type="reset" name="reset" value="Reset">
+      </p>
+
+    </form>
+  </div>
+  <script src="{% static 'js/signup.js' %}"></script>
+  <script>
+    $(document).on('submit', '#signup', function (e) {
+      e.preventDefault();
+      $.ajax({
+        type: 'POST',
+        url: "{% url 'signup' %}",
+        data: $('#signup').serialize(),
+        success: function (data) {
+          alert("Successfully registered!")
+          window.location.href = "{% url 'login' %}"
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+        }
+      });
+    });
+  </script>
+  {% include 'base/Footer.html' %}
+</body>
+
+</html> {% endcomment %}

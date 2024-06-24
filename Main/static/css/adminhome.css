@@ -1,0 +1,28 @@
+.divt {
+    top: 70px;
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.divh {
+    text-align: center;
+}
+
+.hero {
+    font-size: 48px;
+}
+
+.subhero {
+    font-size: 24px;
+}
+
+.phero {
+    font-size: 18px;
+}
+

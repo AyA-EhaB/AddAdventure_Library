@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/userbooks_styles.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrowed Books</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Include SweetAlert2 -->
+</head>
+
+<body>
+    {% include 'user/mainNav.html' %}
+    <h1 class="head" style="text-align: center; color: rgb(58, 156, 242); font-weight: bold;">Borrowed Books</h1>
+    <ul id="borrowedBooksList">
+        {% if borrowed_books %}
+        {% for x in borrowed_books %}
+        <li class="book-item">
+            <a href="{% url 'borrowedBooksdetails' book_id=x.id person_id=personid %}"><img src="{{ x.image.url }}" width="300px" class="book-img" alt="Book 1">
+                <p><a href="" class="book-link">{{ x.bookname }}</a></p>
+            </a>
+            <button type="button" class="button" onclick="confirmReturn('{{ x.id }}', '{{ personid }}')">Return Book</button>
+        </li>
+        {% endfor %}
+        {% else %}
+        <br><br><br>
+        <h3 style="text-align: center;">No Borrowed Books</h3>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        {% endif %}
+    </ul>
+
+    {% include 'user/Footer.html' %}
+
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function confirmReturn(bookId, personId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You are about to return this book.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, return it!',
+                cancelButtonText: 'No, cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`{% url 'return_book' book_id=0 person_id=0 %}`.replace('0', bookId).replace('0', personId), {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': getCookie('csrftoken'),
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            Swal.fire(
+                                'Returned!',
+                                'The book has been returned successfully.',
+                                'success'
+                            ).then(() => {
+                                window.location.href = `{% url 'availableBooks' person_id=personid %}`;
+                                // location.reload();
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                'Something went wrong. Please try again later.',
+                                'error'
+                            );
+                        }
+                    })
+                    .catch((error) => {
+                        Swal.fire(
+                            'Error!',
+                            'Something went wrong. Please try again later.',
+                            'error'
+                        );
+                    });
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

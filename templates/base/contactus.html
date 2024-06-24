@@ -1,0 +1,84 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'css/contactusV3.0.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>contact form</title>
+</head>
+
+<body>
+    {% include "base/Nav.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Get in touch</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"
+                            placeholder="Enter your name" name="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                            placeholder="Enter your email" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Contact Number</label>
+                        <input type="tel" class="form-control" id="exampleFormControlInput1"
+                            placeholder="Enter your number" name="number">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                            name="paragraph"></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-primary">
+                </form>
+            </div>
+            <div class="col-md-5">
+                <h4>Contact Us</h4>
+                <div class="mt-5">
+                    <div class="d-flex">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <p>Address: 5 Ahmed Zewail, Ad Doqi, Dokki, Giza</p>
+                    </div>
+                    <hr>
+                    <div class="d-flex">
+                        <i class="bi bi-telephone-fill"></i>
+                        <p>Contact : 88888888</p>
+                    </div>
+                    <hr>
+                    <div class="d-flex">
+                        <i class="bi bi-envelope-fill"></i>
+                        <p>Email : contact@gmail.com</p>
+                    </div>
+                    <hr>
+                    <div class="d-flex">
+                        <i class="bi bi-browser-chrome"></i>
+                        <p>Website : www.contact.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    {% include "base/Footer.html" %}
+
+</body>
+
+</html>

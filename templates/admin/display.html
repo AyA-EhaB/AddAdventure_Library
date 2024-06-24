@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/userbooks_styles.css' %}">
+</head>
+
+<body>
+    {% include "admin/mainNav.html" %}
+    {% include "admin/adminnav.html" %}
+    <div class="container" style="margin-top:100px">
+        <h1 class="head">Welcome</h1>
+        <h2 class="head">Available Books</h2>
+        <h3>Number of Books: {{ count }}</h3>
+        <ul id="available_books_list" class="book-list">
+            {% for x in data %}
+            <li class="book-item">
+                <div class="book-info">
+                    <a href="{% url 'edit' x.id %}">
+                        {% if x.image %}
+                        <img src="{{ x.image.url }}" width="300px" class="book-img" alt="{{ x.bookname }}">
+                        {% else %}
+                        <img src="{% static 'default.PNG' %}" width="300px" class="book-img" alt="Book 1">
+                        {% endif %}
+                        <br><a href="{% url 'edit' x.id %}" class="book-link">{{ x.bookname }}</a>
+                    </a>
+                    <div class="button-container">
+                        <br><a href="{% url 'edit' x.id %}" class="button">Edit</a>
+                        {% comment %} <form method="POST" action="{% url 'delete' book_id=x.id %}" id="deleteform">
+                            {% csrf_token %}
+                            <button type="button" class="delete" onclick="deletebook(event);">Delete</button>
+                        </form> {% endcomment %}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% include "admin/Footer.html" %}
+    <script src="{% static 'js/delete.js' %}"></script>
+</body>
+
+</html>

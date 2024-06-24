@@ -1,0 +1,414 @@
+/* Google Fonts - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/*css default style*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* to include padding and border in 
+  the element's total width and height */
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  /* background: #f0faff; */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  /*to stick the navbar at the top*/
+  left: 0;
+  /*to stick the navbar at the left*/
+  width: 100%;
+  padding: 15px 200px;
+  /*top and bottom padding 15px, left and right padding 200px*/
+  background: #4a98f7;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /*to create a shadow effect for the navbar*/
+}
+
+.nav,
+.nav .nav-links {
+  /* Setting display to flex for both 
+  .nav and its child .nav-links */
+  /* Flexbox layout allows for easy alignment 
+  and distribution of elements */
+  display: flex;
+  /* Aligning items vertically in the center */
+  align-items: center;
+}
+
+.nav {
+  /* Setting space between elements horizontally */
+  /* This pushes the first and last elements
+   to the edges of the container */
+  justify-content: space-between;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav .logo {
+  font-size: 22px;
+  font-weight: 500;
+  /*to make the text bold*/
+}
+
+.nav .nav-links {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  /* Initially hidden off-screen */
+  height: 100%;
+  max-width: 280px;
+  width: 100%;
+  background-color: #11101d;
+  transition: all 0.4s ease;
+  /* Smooth animation */
+  z-index: 100;
+  /* Ensure it's above other elements */
+}
+
+.nav .nav-links a {
+  transition: all 0.2s linear;
+}
+
+/*The transition duration is set to 0.2s, 
+and the timing function is set to linear, 
+meaning the transition will occur at a constant speed.
+this CSS rule sets up a smooth transition effect 
+for anchor elements within the navigation links,
+ making the change of any style properties smoother */
+
+.nav.openSearch .nav-links a {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav .search-icon {
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.nav .search-box {
+  position: absolute;
+  /* Distance from the right edge of the containing element */
+  right: 250px;
+  /* Height of the search box */
+  height: 45px;
+  /* Maximum width of the search box */
+  max-width: 555px;
+  /* Occupying the full width of the containing element */
+  width: 100%;
+  /* Setting initial opacity to 0, making the search box invisible */
+  opacity: 0;
+  /* Disabling pointer events on the search box, making it unclickable */
+  pointer-events: none;
+  /* Applying transition effects to all properties of the search box */
+  transition: all 0.2s linear;
+  z-index: 1;
+  /* Adjust this value as needed */
+  /* rest of your styles */
+}
+
+
+/* Styles for the search box when the navigation bar is in "openSearch" state */
+.nav.openSearch .search-box {
+  /* Making the search box visible by setting opacity to 1 */
+  opacity: 1;
+  /* Making the search box clickable by enabling pointer events */
+  pointer-events: auto;
+}
+
+/* Styles for the search icon within the search box */
+.search-box .search-icon {
+  position: absolute;
+  /* Distance of the search icon from the left edge of the search box */
+  left: 15px;
+  /* Distance of the search icon from the top edge of the search box */
+  top: 50%;
+  /* Setting the color of the search icon */
+  color: #4a98f7;
+  /* Vertically centering the search icon within the search box using translateY */
+  transform: translateY(-50%);
+}
+
+
+/* Styles for the input field within the search box */
+.search-box input {
+  /* Making the input field fill the entire height and width of the search box */
+  height: 100%;
+  width: 100%;
+  /* Removing default border and outline styles */
+  border: none;
+  outline: none;
+  /* Adding border radius for rounded corners */
+  border-radius: 6px;
+  /* Setting background color to white */
+  background-color: #fff;
+  /* Adding padding to provide spacing for text inside the input field */
+  padding: 0 15px 0 45px;
+  /* top right bottom left */
+}
+
+/* Hiding navigation open and close buttons */
+.nav .navOpenBtn,
+.nav .navCloseBtn {
+  display: none;
+}
+
+
+/* Media query for screens with a maximum width of 1160px */
+@media screen and (max-width: 1160px) {
+
+  /* Adjusting padding for the navigation bar */
+  .nav {
+    padding: 15px 100px;
+    /* 15px top and bottom, 100px left and right */
+  }
+
+  /* Adjusting position of the search box */
+  .nav .search-box {
+    right: 150px;
+    /* Distance from the right edge of the screen */
+  }
+}
+
+/* Media query for screens with a maximum width of 950px */
+@media screen and (max-width: 950px) {
+
+  /* Adjusting padding for the navigation bar */
+  .nav {
+    padding: 15px 50px;
+    /* 15px top and bottom, 50px left and right */
+  }
+
+  /* Adjusting position and maximum width of the search box */
+  .nav .search-box {
+    right: 100px;
+    /* Distance from the right edge of the screen */
+    max-width: 400px;
+    /* Maximum width of the search box */
+  }
+}
+
+/* Media query for screens with a maximum width of 768px */
+@media screen and (max-width: 768px) {
+
+  /* Displaying navigation open and close buttons */
+  .nav .navOpenBtn,
+  .nav .navCloseBtn {
+    display: block;
+  }
+
+  /* Adjusting padding for the navigation bar */
+  .nav {
+    padding: 15px 20px;
+    /* 15px top and bottom, 20px left and right */
+  }
+
+  /* Styles for the navigation links container */
+  .nav .nav-links {
+    /* Fixing the position of the navigation links container */
+    position: fixed;
+    top: 0;
+    left: -100%;
+    /* Initially, the container is shifted out of view to the left */
+    height: 100%;
+    /* Filling the full height of the viewport */
+    max-width: 280px;
+    /* Maximum width of the container */
+    width: 100%;
+    /* Filling the full width of the viewport */
+    padding-top: 100px;
+    /* Adding padding to account for the height of the navigation bar */
+    row-gap: 30px;
+    /* Specifying gap between rows */
+    flex-direction: column;
+    /* Arranging items in a column */
+    background-color: #11101d;
+    /* Background color of the container */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Adding box shadow */
+    transition: all 0.4s ease;
+    /* Adding transition effect for smooth animation */
+    z-index: 100;
+    /* Setting a high z-index to ensure the container is above other elements */
+  }
+
+  /* Styles for the navigation links container when the navigation is open */
+  .nav.openNav .nav-links {
+    left: 0;
+    /* Sliding the container into view by setting left to 0 */
+  }
+
+  /* Styles for the navigation open button */
+  .nav .navOpenBtn {
+    display: block;
+  }
+
+  /* Styles for the navigation close button */
+  .nav .navCloseBtn {
+    position: absolute;
+    /* Positioning the close button absolutely */
+    top: 20px;
+    /* Distance from the top edge of the navigation bar */
+    right: 20px;
+    /* Distance from the right edge of the navigation bar */
+    color: #fff;
+    /* Setting text color */
+    font-size: 20px;
+    /* Setting font size */
+    cursor: pointer;
+    /* Changing cursor to pointer on hover */
+  }
+
+  /* Styles for the search box */
+  .nav .search-box {
+    top: calc(100% + 10px);
+    /* Positioning the search box below the navigation bar */
+    max-width: calc(100% - 20px);
+    /* Setting maximum width of the search box */
+    right: 50%;
+    /* Aligning the search box to the right */
+    transform: translateX(50%);
+    /* Translating the search box horizontally */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Adding box shadow */
+  }
+}
+
+
+/* Media query for screens with a maximum width of 768px */
+@media screen and (max-width: 768px) {
+
+  /* Displaying navigation open and close buttons */
+  .nav .navOpenBtn,
+  .nav .navCloseBtn {
+    display: block;
+  }
+
+  /* Adjusting padding for the navigation bar */
+  .nav {
+    padding: 15px 20px;
+    /* 15px top and bottom, 20px left and right */
+  }
+
+  /* Styles for the navigation links container */
+  .nav .nav-links {
+    /* Fixing the position of the navigation links container */
+    position: fixed;
+    top: 0;
+    left: -100%;
+    /* Initially, the container is shifted out of view to the left */
+    height: 100%;
+    /* Filling the full height of the viewport */
+    max-width: 280px;
+    /* Maximum width of the container */
+    width: 100%;
+    /* Filling the full width of the viewport */
+    padding-top: 100px;
+    /* Adding padding to account for the height of the navigation bar */
+    row-gap: 30px;
+    /* Specifying gap between rows */
+    flex-direction: column;
+    /* Arranging items in a column */
+    background-color: #11101d;
+    /* Background color of the container */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Adding box shadow */
+    transition: all 0.4s ease;
+    /* Adding transition effect for smooth animation */
+    z-index: 100;
+    /* Setting a high z-index to ensure 
+  the container is above other elements */
+    /*100 is the highest z-index value*/
+  }
+
+  /* Styles for the navigation links container when the navigation is open */
+  .nav.openNav .nav-links {
+    left: 0;
+    /* Sliding the container into view by setting left to 0 */
+  }
+
+  /* Styles for the navigation open button */
+  .nav .navOpenBtn {
+    color: #fff;
+    /* Setting text color */
+    font-size: 20px;
+    /* Setting font size */
+    cursor: pointer;
+    /* Changing cursor to pointer on hover */
+  }
+
+  /* Styles for the navigation close button */
+  .nav .navCloseBtn {
+    position: absolute;
+    top: 20px;
+    /* Distance from the top edge of the navigation bar */
+    right: 20px;
+    /* Distance from the right edge of the navigation bar */
+    color: #fff;
+    /* Setting text color */
+    font-size: 20px;
+    /* Setting font size */
+    cursor: pointer;
+    /* Changing cursor to pointer on hover */
+  }
+
+  /* Styles for the search box */
+  .nav .search-box {
+    top: calc(100% + 10px);
+    /* calc() function is used to perform a calculation. 
+   Here, it calculates the distance from the top of 
+   the navigation bar to the bottom of the 
+   viewport (100% of the viewport height) and 
+   adds an additional 10px of space. This ensures that 
+   the search box is positioned just below the navigation bar */
+    max-width: calc(100% - 20px);
+    /* Setting maximum width of the search box */
+    right: 50%;
+    /* 50% of its containing block's width */
+    transform: translateX(50%);
+    /*translates the element horizontally by a specified 
+   percentage of its width. Here, it moves the search box 
+   horizontally by 50% of its own width, effectively 
+   centering it horizontally within its containing block.*/
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /*Horizontal Offset (0):
+Specifies the horizontal distance of the shadow from the element.
+In this case, it's 0, indicating that the shadow is directly behind the element without any horizontal offset.
+     Vertical Offset (2px):
+Specifies the vertical distance of the shadow from the element.
+It's 2px, meaning the shadow is positioned 2px below the element.
+     Blur Radius (10px):
+Specifies the extent to which the shadow is blurred.
+It's 10px, indicating a blur radius of 10px around the shadow.
+     Color and Transparency (rgba(0, 0, 0, 0.1)):
+Represents the color and transparency of the shadow.
+Uses RGBA color format, with 0, 0, 0 representing black color.
+0.1 represents the alpha channel, controlling the shadow's transparency.
+   */
+  }
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  flex: 1;
+}

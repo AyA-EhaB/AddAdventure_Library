@@ -1,0 +1,82 @@
+.edit-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+}
+
+.image-container {
+    margin-bottom: 20px;
+}
+
+.image-upload-label {
+    display: block;
+    text-align: center;
+    border: 2px dashed #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#preview-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.upload-text {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.text-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-btn,
+.reset-btn {
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #4a98f7;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover,
+.reset-btn:hover {
+    background-color: #357ae8;
+}
+
+.description {
+    text-align: center;
+}
+
+.container {
+    top: 100px;
+}
+
+.delete {
+    margin-bottom: 5px;
+    margin-left: 25%;
+    padding: 10px 20px;
+    background-color: #4a98f7;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete:hover {
+    background-color: #357ae8;
+}

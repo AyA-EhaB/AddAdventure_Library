@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ book.bookname }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bookdetails.css' %}">
+</head>
+
+<body>
+    {% include 'base/Nav.html' %}
+
+    <div class="container">
+        <h1>{{ book.bookname }}</h1>
+        <img src="{{ book.image.url }}" alt="{{ book.bookname }}" width="300px">
+        <table>
+            <tr>
+                <th>Author</th>
+                <td>{{ book.Author }}</td>
+            </tr>
+
+            <tr>
+                <th>Category</th>
+                <td>{{ book.category }}</td>
+            </tr>
+            <tr>
+                <th>Publisher</th>
+                <td>{{ book.publisher }}</td>
+            </tr>
+            <tr>
+                <th>Publication Date</th>
+                <td>{{ book.PublicationDate }}</td>
+            </tr>
+            <tr>
+                <th>Number of Pages</th>
+                <td>{{ book.noofpages }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ book.Description }}</td>
+            </tr>
+            <tr>
+                <th>Number of avilable copies of this book</th>
+                <td>{{ book.noofcopies }}</td>
+            </tr>
+        </table>
+    </div>
+
+
+
+    {% include 'base/Footer.html' %}
+
+</body>
+
+</html>

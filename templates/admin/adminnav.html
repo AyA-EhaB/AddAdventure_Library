@@ -1,0 +1,11 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/nav2v1.3.css' %}">
+{% comment %} <link rel="stylesheet" href="adminnav.css"> {% endcomment %}
+
+
+<div class="navbar">
+    <ul>
+        <li><a href="{% url 'add' %}">Add</a></li>
+        <li><a href="{% url 'admindisplay' %}">View</a></li>
+    </ul>
+</div>

@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login page</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<body>
+    <script>
+        {% if error_message %}
+        alert("{{ error_message }}")
+        {% endif %}
+    </script>
+
+    {% include "base/Nav.html" %}
+
+    <div class="login-container">
+        <form method="post" class="login-form" id="loginform">
+            {% csrf_token %}
+            <h2 class="form-title">Login</h2>
+            <div class="form-group">
+                <input type="text" required placeholder="Username" name="username" id="username" autofocus
+                    class="form-input">
+            </div>
+            <div class="form-group">
+                <input type="password" required placeholder="Password" name="password" id="password" class="form-input">
+            </div>
+            <a href="{% url 'signup' %}" class="form-link">Sign up</a>
+            <div class="form-group">
+                <button type="button" class="form-submit" onclick="login(event);">Login</button>
+                <input type="reset" name="reset" value="Reset" class="form-submit">
+            </div>
+        </form>
+    </div>
+    {% include 'base/Footer.html' %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js/login.js' %}"></script>
+</body>
+
+</html>

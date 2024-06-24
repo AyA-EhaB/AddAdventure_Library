@@ -1,0 +1,140 @@
+ /* books_styles.css */
+ .book-list {
+     list-style-type: none;
+     padding: 0;
+     margin: 0;
+
+ }
+
+ .book-item {
+     margin-bottom: 20px;
+     text-align: center;
+     display: inline-block;
+     width: 45%;
+     margin-right: 5px;
+     border-radius: 2px;
+     /* Rounded corners */
+
+
+ }
+
+ .book-item:hover {
+     transform: translateY(-5px);
+     /* Move up on hover */
+ }
+
+ .book-link {
+     display: block;
+     text-decoration: none;
+     color: #2a1919;
+     margin-bottom: 10px;
+ }
+
+ .book-img {
+     width: 250px;
+     height: 300px;
+     display: block;
+     margin: auto;
+     border: 1px solid #ddd;
+     padding: 10px;
+
+     border-radius: 10px;
+     /* Rounded corners */
+     background-color: rgb(230, 236, 242);
+     box-shadow: 10px 10px 5px rgb(193, 168, 168);
+     transition: transform 0.3s ease;
+     /* Smooth hover effect */
+ }
+
+ .button {
+     display: block;
+     width: 200px;
+     margin: 10px auto;
+     padding: 8px 16px;
+     border: none;
+     border-radius: 5px;
+     background-color: #3a9cf2;
+     color: #fff;
+     font-size: 14px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+
+ /* CSS for the search input */
+ .search-input {
+     padding: 8px;
+     font-size: 16px;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     width: 300px;
+     /* Adjust width as needed */
+     margin-bottom: 10px;
+ }
+
+ /* CSS for the container div */
+ .box {
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+     padding: 16px;
+     background-color: #f9f9f9;
+ }
+
+ /* CSS for the book list */
+ .book-list {
+     list-style-type: none;
+     padding: 0;
+ }
+
+ /* Example styling for list items */
+ .book-item {
+     margin-bottom: 8px;
+     padding: 8px;
+     background-color: #fff;
+     border: 1px solid #ddd;
+     border-radius: 4px;
+ }
+
+
+
+
+
+ .book-cover-container {
+     position: relative;
+     display: inline-block;
+     padding: 20px;
+     background-color: #f7f2c4;
+     border-radius: 10px;
+ }
+
+ .book-cover-container img {
+     display: block;
+     width: auto;
+     height: auto;
+ }
+
+ .container {
+     text-align: center;
+     width: 80%;
+     margin: 0 auto;
+     padding: 20px;
+     background-color: #fff;
+ }
+
+ table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-bottom: 20px;
+ }
+
+ th,
+ td {
+     border: 1px solid #ddd;
+     padding: 8px;
+     text-align: left;
+ }
+
+ th {
+     background-color: rgb(240, 240, 240);
+     font-weight: bold;
+ }

@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <style>
+        .sec1 {
+            background-image: url("{% static 'About.jpg' %}");
+            margin-top: 7.5%;
+        }
+        
+    </style>
+</head>
+<body>
+    {% include "admin/mainNav.html" %}
+    
+    <section class="sec1">
+        
+        <div class="div1">
+            <h1>About AddAdven</h1>
+            <p>Welcome to AddAdven! We are dedicated to fostering a love for reading, learning, and exploration within our community. Our extensive collection of books, journals, and digital resources caters to diverse interests and academic pursuits. Whether you're a student, researcher, or avid reader, you'll find a wealth of knowledge waiting to be discovered within our shelves and online archives. Our passionate staff is here to assist you in your quest for information and enlightenment. Join us in celebrating the joy of discovery and the power of education at our library.</p>
+            <p>Our library is not just a place for books; it's a hub of intellectual engagement and community connection. We host a variety of events, workshops, and discussions that inspire curiosity, creativity, and critical thinking. From author talks and book clubs to educational seminars and cultural exhibits, there's always something exciting happening at our library. We believe in the power of knowledge to transform lives and empower individuals, and we strive to create a welcoming space where everyone can learn, grow, and thrive. Join us in exploring the endless possibilities that our library has to offer.</p>
+            <p>
+                <ul>
+                    <li>
+                        What is AddAdven?
+                        <br>
+                        AddAdven is a great resource for locating unique, trustworthy materials that you often can’t find anywhere except in a library. And by connecting tens of books in one place, AddAdven makes it easy for you to browse the world’s libraries from one easy search box.
+                    </li>
+                    <li>AddAdven is completely free.</li>
+                    <li>Find your new favorite book with personalized recommendations.</li>
+                </ul>
+            </p>
+        </div>
+    </section>
+    {% include "admin/Footer.html" %}
+</body>
+</html>

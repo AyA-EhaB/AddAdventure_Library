@@ -1,0 +1,86 @@
+{% load static %}
+
+<html>
+<head>
+    <title>Books</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/userbooks_styles.css' %}">
+</head>
+
+<body>
+    {% include 'base/Nav.html' %}
+
+    <h1 class="head" style="text-align: center; color: rgb(58, 156, 242); font-weight: bold; margin-top: 70px;">Books</h1>
+
+    <input type="text" placeholder="Search here..." id="search" class="search-input" style = "margin-left: 10px;">
+    <div id="box">
+        <ul id="available_books_list" class="book-list">
+            
+        </ul>
+    </div>
+
+    {% include 'base/Footer.html' %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        // Function to load all books initially
+        loadAllBooks();
+
+        $('#search').on('keyup', function() {
+            var query = $(this).val().trim();
+            if (query.length < 1) {
+                loadAllBooks();
+            } else {
+                searchBooks(query);
+            }
+        });
+
+        function searchBooks(query) {
+            $.ajax({
+                type: 'GET',
+                url: '{% url 'nonebooklist' %}',
+                data: {
+                    'q': query
+                },
+                success: function(data) {
+                    updateBookList(data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function loadAllBooks() {
+            $.ajax({
+                type: 'GET',
+                url: '{% url 'nonebooklist' %}',
+                success: function(data) {
+                    updateBookList(data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function updateBookList(data) {
+            var bookList = $('#available_books_list');
+            bookList.empty();
+            if (data.length > 0) {
+                $.each(data, function(index, book) {
+                    var listItem = '<li class="book-item">' +
+                        '<a href="{% url 'bookdetailsfornone' 0 %}'.replace('0', book.id) + '">' +
+                        '<img src="' + book.image_url + '" width="300px" class="book-img" alt="Book">' +
+                        '<p><a href="{% url 'bookdetailsfornone' 0 %}'.replace('0', book.id) + '" class="book-link">' + book.bookname + '</a></p>' +
+                        '</a></li>';
+                    bookList.append(listItem);
+                });
+            } else {
+                bookList.append('<br><li>No books found</li><br><br><br><br><br><br>');
+            }
+        }
+    });
+    </script>
+</body>
+</html>

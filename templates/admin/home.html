@@ -1,0 +1,23 @@
+
+{% load static %}
+<html>
+
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{% static 'css/adminhome.css' %}">
+</head>
+
+<body>
+    {% include "admin/mainNav.html" %}
+    <div class="divt">
+        <div class="divh">
+            <h1 class="hero">AddAdven</h1>
+            <h1 class="subhero">Connect. Learn. Grow.</h1>
+            <b class="phero">Welcome to AddAdven, where every book is a portal to a new experience.</b>
+        </div>
+    </div>
+    {% include "admin/Footer.html" %}
+
+</body>
+
+</html>
